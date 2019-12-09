@@ -10,6 +10,8 @@
 |nickname|string|null: false|index: true|
 ### Association
 - has_many :tweets
+- has_many :groups,through: :users_group
+- has_many :users_groups
 
 ## tweetsテーブル
 |Column|Type|Options|
@@ -17,9 +19,10 @@
 |image|text||
 |text|text||
 |user_id|references|null: false foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
-- has_many :tweets
+- belongs_to :group
 
 ## groupテーブル
 |Column|Type|Options|
@@ -32,7 +35,7 @@
 - has_many :users_groups
 
 
-## users_chatテーブル
+## users_groupテーブル
 |Column|Type|Options|
 |------|----|-------|
 |id|integer|null: false|
