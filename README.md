@@ -10,7 +10,6 @@
 |nickname|string|null: false|
 ### Association
 - has_many :tweets
-- has_many :comments
 
 ## tweetsテーブル
 |Column|Type|Options|
@@ -20,7 +19,7 @@
 |user_id|references|null: false foreign_key: true|
 ### Association
 - belongs_to :user
-- has_many :comments
+- has_many :tweets
 
 ## groupテーブル
 |Column|Type|Options|
@@ -28,7 +27,7 @@
 |name|string|null: false|
 |id|integer|null: false|
 ### Association
-- has_many :comments
+- has_many :tweets
 - has_many :users,through: :users_groups
 - has_many :users_groups
 
