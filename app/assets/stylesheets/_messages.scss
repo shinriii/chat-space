@@ -85,53 +85,47 @@
       }
     }
   }
-  .form{
+  .new_message{
     height: 90px;
-    // width: calc(100vw - 300px);
+    width: calc(100vw - 300px);
     background-color: #d2d2d2;
     padding: 20px 40px;
-      .new_message{
-        display: flex;
-        .input-box{
-          position: relative;
-          width: 100%;
-          &__text{
-            
-            height: 50px;
-            width: 100%;
-            padding: 0 40px 0 10px;
-            line-height: 50px;
-            color: #434a54;
-            border-style: none;
-            background-color: white;
-          }
-          .input-box__image{
-
-            font-size: 1.3rem;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            .fa.fa-image{
-              
-            }
-            .hide{
-              display: none;
-            }
-        }
-        }
-        .submit-btn{
-          width: 100px;
-          height: 50px;
-          padding: 0 30px;
-          margin-left: 15px;
-          background-color: #38aef0;
-          color: white;
-          cursor: pointer;
-          line-height: 50px;
-        }
-
+    display: flex;
+    &__box{
+      display: flex;
+      position: relative;
+      width: 100%;
+      &__left{
+        height: 50px;
+        width: 100%;
+        padding: 0 40px 0 10px;
+        line-height: 50px;
+        color: #434a54;
+        border-style: none;
+        background-color: white;
       }
+      &__image{
+
+        font-size: 1.3rem;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        .new_message__hide{
+          display: none;
+        }
+      }
+    }
+    &__submit-btn{
+      width: 100px;
+      height: 50px;
+      padding: 0 30px;
+      margin-left: 15px;
+      background-color: #38aef0;
+      color: white;
+      cursor: pointer;
+      line-height: 50px;
+    }      
   }
 }
 
