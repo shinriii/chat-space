@@ -91,7 +91,7 @@
     background-color: #d2d2d2;
     padding: 20px 40px;
     display: flex;
-    &__box{
+    .field_with_errors{
       display: flex;
       position: relative;
       width: 100%;
@@ -111,12 +111,12 @@
         top: 10px;
         right: 10px;
         cursor: pointer;
-        .new_message__hide{
+        .field_with_errors__hide{
           display: none;
         }
       }
     }
-    &__submit-btn{
+    .field_with_errors__submit-btn{
       width: 100px;
       height: 50px;
       padding: 0 30px;
@@ -175,6 +175,7 @@
     background-color: #2f3e51;
     height :calc(100vh - 100px);
     width: 300px;
+    overflow: scroll;
     a{
       text-decoration: none;
       .group{
