@@ -1,14 +1,14 @@
 $(function(){ 
   function buildHTML(message){
-   if ( message.image ) {
+   if ( message.content && message.image) {
      var html =
       `<div class="message" data-message-id=${message.id}>
          <div class="message__upper-info">
            <div class="message__upper-info__talker">
-             ${message.name}
+             ${message.user_name}
            </div>
            <div class="message__upper-info__date">
-             ${message.date}
+             ${message.created_at}
            </div>
          </div>
          <div class="message__text">
@@ -19,15 +19,15 @@ $(function(){
          <img src=${message.image} >
        </div>`
      return html;
-   } else {
+   } else if (message.content){
      var html =
       `<div class="message" data-message-id=${message.id}>
          <div class="message__upper-info">
            <div class="message__upper-info__talker">
-             ${message.name}
+             ${message.user_name}
            </div>
            <div class="message__upper-info__date">
-             ${message.date}
+             ${message.created_at}
            </div>
          </div>
          <div class="message__text">
@@ -37,8 +37,25 @@ $(function(){
          </div>
        </div>`
      return html;
+   }else if (message.image){
+    var html =
+    `<div class="message" data-message-id=${message.id}>
+       <div class="message__upper-info">
+         <div class="message__upper-info__talker">
+           ${message.user_name}
+         </div>
+         <div class="message__upper-info__date">
+           ${message.created_at}
+         </div>
+       </div>
+       <div class="message__text">
+       </div>
+       <img src=${message.image} >
+     </div>`
+   return html;
    };
  }
+
 $('#new_message').on('submit', function(e){
  e.preventDefault();
  var formData = new FormData(this);
@@ -62,4 +79,32 @@ $('#new_message').on('submit', function(e){
    });
    return false;
  });
+  var reloadMessages = function() {
+    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+    last_message_id = $('.message:last').data("message-id");
+    $.ajax({
+      //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
+      url: "api/messages",
+      //ルーティングで設定した通りhttpメソッドをgetに指定
+      type: 'get',
+      dataType: 'json',
+      //dataオプションでリクエストに値を含める
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      var insertHTML = '';
+      $.each(messages, function(i, message) {
+        insertHTML += buildHTML(message)
+      });
+      $('.messages').append(insertHTML);
+      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+    })
+    .fail(function() {
+      console.log('error');
+    });
+  };
+
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
